@@ -1,0 +1,110 @@
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# program data
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+1                                 # prog_analysis                              see comments at the end of this file
+30                                # newt_maxit
+1e-9                              # newt_tol
+'../mesh'  'mesh'                 # mesh_directory and mesh_name    'coaxialTubes'
+'./plots/'                        # plot_directory
+'./restart/'                      # restart_directory
+'restartCyl.io' 'restartCyl.io' # input_restart_file and output_restart_file 'restartRe1420r1.io' 'restartRe1420r1.io'
+.f. .t.                           # read_restart_flag and write_restart_flag 
+.t.                               # write_QP_restart_flag
+.t.                               # write_BVS_flag
+.t.                               # write_plots_flag
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# (3) eigenvalue data
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+2                                 # eigen_BC
+1                                 # eigen_number
+100                               # eigen_maxit
+0d0                               # eigen_tol
+(0.0,0.73513)                     # eigen_shift (0.0,-5.7) (313,313)
+'./eigenOut/Re46p51/'             # eigen_output_directory
+1                                 # eigen_plotn
+3                                 # eigen_kind       1:direct   2:adjoint   3:both
+.f.                               # compute_structural_sensitivity_flag
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# (4) structural sensitivity data
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+1                                 # strsens_eigen
+'./eigenOut/ru1_Re1420_beta0/directEigenvectorsSteadyState-Shift_Re+000000_Im-005700.dat'  #  direct eigenvectors file
+'./eigenOut/ru1_Re1420_beta0/adjointEigenvectorsSteadyState-Shift_Re+000000_Im-005700.dat' # adjoint eigenvectors file
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# (5) transient growth data
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+2                                 # trgrowth_method
+2                                 # trgrowth_initguess
+2                                 # trgrowth_BC     before 1
+8                                 # tau
+0.05                              # trgrowth_dt
+50                                # trgrowth_maxit
+1d-10                             # trgrowth_tol
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# (6) centre manifold reduction (8) for time evolution on cm
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+4                                 # max order of the expansion
+48.0                              # Reynolds e = (Re-Re_c)/(Re*Re_c)
+0.0                               # tInit
+1000.0                            # tFin
+1e-3                              # dt
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# (7) dns data
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+1                                 # dns_method
+0                                 # dns_initT
+300                               # dns_endT
+5e-2                              # dns_dt
+0.5                               # dns_dtplot
+'./dnsOut/'                       # dns_outputdir
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# (7) evolve transient growth data
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+'tranGrowthOut/ru0.5/Re750/tranGrowthShape.........' # evtrgrowth_optpert      optimal perturbation to be evolved
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# (8) harmonic gain
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+'./HarmonicGain/case/'            # output directory for the Harmonic Gain
+5                                 # num of opt.forcing and response to be computed
+5                                 # num of opt.forcing and response to be plotted
+'in'                              # identifier for the kind of forcing: 'vol' for volume forcing or 'vol' for inlet forcing
+'inlet'                           # control domain  'whole' or 'noninlet'
+0.8                               # blending interval (cubic)
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# (9) harmonic gain : sensitivity to base flow
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+'no'                              # Sensitivity computation ? 'yes' or 'no'
+1                                 # harmonic gain Id, whose sensitivity is computed (to now, all the sensitivities are computed!!)
+'in'                              # identifier for the kind of forcing: 'vol' for volume forcing or 'vol' for inlet forcing in gain computation
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# (10) stochastic gain computation
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+'no'                              # Stochastic Gain computation
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# (11) sensitivity to control cylinder (harmonic gains)
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+'yes'                             # cylinder sensitivity? 'yes' , 'no'
+0.05                              # cylinder diameter
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# COMMENTS (what follows is not read by pasta)
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+analysis: 1 = steady state computation
+          2 = continuation analisys with LOCA
+          3 = eigenvalue computation and, possibly, structural sensitivity computation
+          4 = structural sensitivity computation
+          5 = computation of linearly optimal perturbations and their transient growth
+          6 = DNS
+          7 = evolution of a linearly optimal perturbation on the nonlinear system
+
+eigen_BC &&
+tranGrowth_BC : 1 = zero velocity on every border
+                2 = same as base flow
+
+trgrowth_initGuess : 1 = ARPACK's random guess and zero pressure
+                         the velocity is NOT zero on borders
+                     2 = pseudo-random guess
+                         the velocity is zero on borders
+                     3 = base flow, both velocity and pressure
+                     4 = eigenvalue, which has to be read in this file
+                           './tranGrowthOut/eigenTranGrowth.dat'

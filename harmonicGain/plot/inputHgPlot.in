@@ -1,0 +1,27 @@
+# Input file to generate the HG data for G(omega) plot
+'vector'                 # type of input :   'equisp' , 'vector'
+'./omega.in'             # ... 
+0.15                     # scale factor omega = n * SF
+0.15                     # first value of omega
+10                       # number of omegas
+# ------------------------------------------------------------
+30                       # max number of HGs
+'../case/'               # folder
+''                       # 'vol' , 'in'
+# ----- output filename --------------------------------------
+'step2_Re1000.dat'          # 'hgRe500.dat'
+# ================ What follows is a comment =================
+# 
+# 1. Model of input file for CoaxJets
+# Input file to generate the HG data for G(omega) plot
+#'equisp'                 # type of input :   'equisp' , 'vector'
+#'./inputOmVct.in'        # ... 
+#0.25                     # scale factor omega = n * SF
+#0.25                     # first value of omega
+#24                       # number of omegas
+## ------------------------------------------------------------
+#5                        # max number of HGs
+#'../Results/CoaxJets/Ref2HgRe500In/case/'   # folder
+#'in'                     # 'vol' , 'in'
+## ----- output filename --------------------------------------
+#'hgRe500In.dat'          # 'hgRe500.dat'

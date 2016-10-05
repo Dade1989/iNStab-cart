@@ -1,0 +1,42 @@
+# Input file for gnuplot surf/map plot
+
+
+# Plot parameters
+# x1 = -15 ; x2 =  15 ; dx = 5 # ; nx = 6 ; dx = (x2-x1)/nx
+# y1 =   0 ; y2 =  30 ; dy = 5 # ; ny = 6 ; dy = (y2-y1)/ny
+
+xmin = 0.0 ; xmax = 2.0
+ymin = 1e-2 ; ymax = 5e6
+
+col = 30
+
+# Title and labels ==========================================
+set title # "{/Symbol r}(x,y)"
+set xlabel "St"
+set ylabel "G_k"
+# set key top                            ??? BOH ???
+# set border 4095                        OK. GOOD EVEN W/O BORDER
+set xrange [xmin:xmax]
+set yrange [ymin:ymax]
+
+# set line style
+set style line 1 lt rgb "black" lw 1
+
+# semilogy
+set logscale y
+set format y "10^{%L}"
+# for subscripts in labels
+set termopt enhanced 
+
+# set grid
+set grid
+# unset legend
+unset key
+
+# omega HG_1 , HG_2 , ... , HG_col
+plot for [i1=2:col+1] "HG_Re1000a10S00_in.dat" using ($1)/pi:(column(i1))**0.5 ls 1 with lines
+# plot for [i1=2:col+1] "HG_Re1000a10S00_in.dat" using 1:i1 with lines
+
+
+pause -1 "Hit return to continue"
+

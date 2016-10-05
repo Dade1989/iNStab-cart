@@ -1,0 +1,50 @@
+30.0000   0.0  # 0.0 0.0  # Reynolds, oscar, romeo, whisky  #0    # beta    Re = 47.0926
+#
+.t. .t.  .f. .f. 'i' # 1  IN center tube
+.t. .t.  .f. .f. 'w' # 2  out 
+.f. .f.  .t. .t. 'o' # 3  out 
+.t. .t.  .f. .f. 'w' # 4  out 
+#
+0.   0.  0.  4. -4.     0.  0.  0.  0.  0.     0.  0.  0.  0.  0.     # 1  IN inner tube
+0.   0.  0.  0.  0.     0.  0.  0.  0.  0.     0.  0.  0.  0.  0.     # 2
+0.   0.  0.  0.  0.     0.  0.  0.  0.  0.     0.  0.  0.  0.  0.     # 3
+0.   0.  0.  0.  0.     0.  0.  0.  0.  0.     0.  0.  0.  0.  0.     # 4  OUTFLOW
+# ------ END OF READ LINES -------------------
+0.0  0.0    # volume forcing along z
+0.0  0.0    # volume forcing along R
+0.0  0.0    # volume forcing along theta
+
+# all that follows is interpreted as comments
+
+# legend for the second block:
+#
+# u_z                                                                       u_R                        u_theta
+#
+# const,            z, z**2, R, R**2
+
+#==============================================================================
+# geometry definitions
+#
+# (X) : border number
+#                     _____________________L3_(8)______________________
+#                     |                                                |
+#                     L2 (7)                                           |
+#                     |                                                |
+#      _______L1_(6)__|                                                |
+#      |                                                               |
+#      H (5)                                                           |
+#      |_______(4)____                                                 |
+#      _______________|S (3)                                           L4 (9)
+#      |       (2)                                                     |
+#      |                                                               |
+#      R (1)                                                           |
+#      |                                                               |
+#  __ .| __ . __ . __ . __ . __ . __ . __ . __ . __ . __ . __ . __ . __| . __ 
+#                     (0,0)        axis of symmetry (10)
+#
+#==============================================================================
+# Bifurcation
+#     cyl3     cyl2     cyl4      cyl1        old cyl1
+#   46.7406  46.4806   46.4798   47.0062         46.4754455
+# DNS test
+#                      50.00
