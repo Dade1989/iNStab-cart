@@ -1,0 +1,17 @@
+# iNStab-cart
+# FEM code for stability and response analysis for INCOMPRESSIBLE fluids
+# 2d - 2v flows 
+#
+# 1. Steady Solution
+# 2. Eigenproblem
+#  . ...
+#  . ...
+# _. Reduction to Centre Manifold
+# _. Harmonic Gain Analysis
+# _. Stochastic Gain Analysis
+# _. Sensitivity Analysis
+#
+#
+# Several libraries are required: check Makefile
+# ...
+
