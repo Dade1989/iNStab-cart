@@ -1,17 +1,32 @@
-# iNStab-cart
-# FEM code for stability and response analysis for INCOMPRESSIBLE fluids
-# 2d - 2v flows 
+# ++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #
+# iNStab-cart                                              #
+# ++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #
+#   FEM f90 code for stability and response analysis for   #
+#   INCOMPRESSIBLE fluids. This is the cartesian version   #
+#   of the code for 2d - 2v flows                          #
+# ++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #
 #
-# 1. Steady Solution
-# 2. Eigenproblem
-#  . ...
-#  . ...
-# _. Reduction to Centre Manifold
-# _. Harmonic Gain Analysis
-# _. Stochastic Gain Analysis
-# _. Sensitivity Analysis
+# 1. Analyses: +++++++++++++++++++++++++++++++++++++++++++ #
+#    1- Steady Solution
+#    2- Eigenproblem
+#     - ...
+#     - ...
+#    _- Centre Manifold Reduction
+#    _- Harmonic Gain Analysis
+#    _- Stochastic Gain Analysis
+#    _- Sensitivity Analysis
 #
+# 2. Libraries: ++++++++++++++++++++++++++++++++++++++++++ #
+#    Several libraries are required: please check Makefile
+#    ...
 #
-# Several libraries are required: check Makefile
-# ...
+# 3. TODOs +++++++++++++++++++++++++++++++++++++++++++++++ #
+#    This is a beta version. Some of the required checks
+#    are listed below: 
+#    - -fcheck=all (-fcheck=bounds) introduces error in
+#      the HG analysis.
+#    - Centre Manifold Reduction is written for bif with
+#      cod .GE. 1, but interaction of perturbations with
+#      different wavenumber must be implemented yet.
+#    - ...
 
